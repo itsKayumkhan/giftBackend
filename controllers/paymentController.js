@@ -18,7 +18,6 @@ exports.checkOut = catchAsyncErrors(async (req, res) => {
 
  
     const order = await instance.orders.create(orderOptions);
-    console.log(req.body)
     // Save the order details in your database
     const newOrder = new Order({
       shippingInfo: shippingInfo,

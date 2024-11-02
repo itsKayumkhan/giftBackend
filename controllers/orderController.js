@@ -6,7 +6,9 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // get logged in user  Orders
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
+  const orders = await Order.find({ user: req.user._id }).populate(
+    ['user'],
+  );
 
   res.status(200).json({
     success: true,
@@ -16,7 +18,9 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
 // get all Orders -- Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find();
+  const orders = await Order.find().populate(
+    ['user'],
+  );;
 
   let totalAmount = 0;
 
